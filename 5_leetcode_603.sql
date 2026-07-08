@@ -31,5 +31,5 @@ SELECT * FROM `Cinema`;
 
 SELECT seat_id FROM 
   (SELECT seat_id, free, LEAD(free, 1) OVER(ORDER BY seat_id) AS next_seat
-FROM `Cinema`) Cinema_next_row
+FROM Cinema) Cinema_next_row
 WHERE next_seat = 1;
