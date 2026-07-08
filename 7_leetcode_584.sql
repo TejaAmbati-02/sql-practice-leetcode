@@ -1,0 +1,10 @@
+SELECT name
+FROM Customer
+WHERE referee_id !=2 OR referee_id IS NULL;
+
+SELECT CUSTOMER.* 
+    FROM CUSTOMER 
+    WHERE CUSTOMER.ID NOT IN 
+        (SELECT A.ID
+        FROM CUSTOMER A JOIN CUSTOMER B
+        ON A.REFEREE_ID = B.ID); 
