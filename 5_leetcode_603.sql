@@ -24,7 +24,7 @@ SELECT * FROM `Cinema`;
 -- 0 -> Occupied, 1 -> Free
 
 
--- Consecutive availble seats in cinema
+-- Consecutive available seats in cinema
 
 
 
