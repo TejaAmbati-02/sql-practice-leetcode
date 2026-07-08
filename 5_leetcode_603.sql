@@ -27,8 +27,6 @@ SELECT * FROM `Cinema`;
 -- Consecutive available seats in cinema
 
 
-
-
 SELECT seat_id FROM 
   (SELECT seat_id, free, LEAD(free, 1) OVER(ORDER BY seat_id) AS next_seat
 FROM Cinema) Cinema_next_row
@@ -44,7 +42,13 @@ WHERE (next_seat = 1 OR next_seat IS NULL) AND free = 1
 ORDER BY seat_id;
 
 
-
+SELECT seat_id FROM 
+  (SELECT seat_id, free, 
+  LEAD(free, 1, 1) OVER(ORDER BY seat_id) AS next_seat,
+  LAG(free,1) OVER(ORDER BY seat_id) AS prev_seat
+FROM Cinema) Cinema_next_row
+WHERE (next_seat = 1 OR prev_seat = 1) AND free = 1
+ORDER BY seat_id;
 
 
 SELECT seat_id FROM 
@@ -52,5 +56,6 @@ SELECT seat_id FROM
   LEAD(free, 1, 1) OVER(ORDER BY seat_id) AS next_seat,
   LAG(free,1) OVER(ORDER BY seat_id) AS prev_seat
 FROM Cinema) Cinema_next_row
-WHERE (next_seat = 1 OR prev_seat = 1) AND free = 1
+WHERE next_seat = 1 AND free = 1
+OR prev_seat = 1 AND free = 1
 ORDER BY seat_id;
